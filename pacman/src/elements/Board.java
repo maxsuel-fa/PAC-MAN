@@ -11,8 +11,6 @@ import javafx.scene.image.Image;
  * @author Maxsuel F. de Almeida
  */
 public class Board extends Element {
-
-
     public char[][] maze;
     // Each cell of the maze. It will be useful to check collision with the walls
     public ArrayList<Cell> cells;
@@ -28,7 +26,8 @@ public class Board extends Element {
         super(0, 0, image);
 
         // Create the maze array.
-        this.maze = new char[][] {{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+        this.maze = new char[][] {
+            {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
             {'#', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#', '#', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#'},
             {'#', '.', '#', '#', '#', '#', '.', '#', '#', '#', '#', '#', '.', '#', '#', '.', '#', '#', '#', '#', '#', '.', '#', '#', '#', '#', '.', '#'},
             {'#', 'O', '#', '#', '#', '#', '.', '#', '#', '#', '#', '#', '.', '#', '#', '.', '#', '#', '#', '#', '#', '.', '#', '#', '#', '#', 'O', '#'},
@@ -70,13 +69,16 @@ public class Board extends Element {
 
     /**
      * Given a position, clears the cell.
-     * @param row
-     * @param col
+     * @param row row of the cell in the maze matrix.
+     * @param col col of the cell in the maze matrix.
      */
     public void clearCell(int row, int col) {
         maze[row][col] = ' ';
     }
 
+    /**
+     * Create the graph that represents the maze.
+     */
     public void createMazeGraph() {
         mazeGraph = new Graph();
 
@@ -114,6 +116,9 @@ public class Board extends Element {
         }
     }
 
+    /**
+     * Create the cells based in the maze array.
+     */
     private void createCells() {
         cells = new ArrayList<>();
 

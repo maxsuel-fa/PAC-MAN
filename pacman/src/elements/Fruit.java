@@ -6,19 +6,19 @@ import javafx.scene.image.Image;
 
 /**
  * This class represents the fruits of the game.
- * 
+ *
  * Each fruit will be a instance of such class.
- * 
+ *
  * @author Maxsuel F. de Almeida
  */
-public class Fruit extends Element{
-    
+public class Fruit extends Element {
+
     public FruitType type;
     public int value;
-    
+
     /**
      * Constructor of the class.
-     * 
+     *
      * @param row Row of the fruit in the board.
      * @param col Column of the fruit in the board.
      * @param type Fruit type.
@@ -30,10 +30,10 @@ public class Fruit extends Element{
         this.type = type;
         this.value = value;
     }
-    
+
     @Override
     public void render(GraphicsContext graphicsContext) {
         graphicsContext.drawImage(this.getImage(), this.getX(), this.getY());
     }
-    
+
 }

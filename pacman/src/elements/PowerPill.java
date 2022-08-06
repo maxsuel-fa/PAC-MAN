@@ -5,13 +5,18 @@ import javafx.scene.image.Image;
 
 /**
  * This class represents the power pills of the game.
- * 
+ *
  * @author Maxsuel F. Almeida
  */
 public class PowerPill extends Element {
-
     private final int value;
 
+    /**
+     * The constructor of the class.
+     * @param row row of the power pill in the maze matrix.
+     * @param col column of the power pill in the maze matrix.
+     * @param image image of the power pill.
+     */
     public PowerPill(int row, int col, Image image) {
         super(row, col, image);
         value = 50;
@@ -27,7 +32,7 @@ public class PowerPill extends Element {
 
     /**
      * Return the value of the power pill
-     * 
+     *
      * @return The value of the power pill.
      */
     public int getValue() {

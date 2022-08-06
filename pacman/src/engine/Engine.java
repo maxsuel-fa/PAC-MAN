@@ -21,7 +21,7 @@ import utils.Utils;
 
 /**
  * Engine of the game.
- * This class is responsible for processing movement and collisions, 
+ * This class is responsible for processing movement, for check collisions,
  * for counting points, for counting lives and for managing levels.
  * @author Maxsuel F. de Almeida
  */
@@ -46,8 +46,8 @@ public class Engine {
     }
 
     public void elementsUpdate(
-            Board board, PacMan pacMan,
-            ArrayList<Ghost> ghosts, ArrayList<Element> foods) {
+        Board board, PacMan pacMan,
+        ArrayList<Ghost> ghosts, ArrayList<Element> foods) {
         // Move pacman to a new position
         this.shiftDirection(pacMan, board);
         this.move(pacMan, board);
@@ -63,21 +63,21 @@ public class Engine {
             // Check collision with the pacman
             if (this.areColliding(pacMan, g)) {
                 switch (g.mode) {
-                    case NORMAL:
-                        pacMan.mode = Mode.DIED;
-                        pacMan.diedTime = System.currentTimeMillis();
-                        lives--;
-                        break;
+                case NORMAL:
+                    pacMan.mode = Mode.DIED;
+                    pacMan.diedTime = System.currentTimeMillis();
+                    lives--;
+                    break;
 
-                    case VULNERABLE:
-                        eatenGhosts++;
-                        score += 200 * ((int) Math.pow(2, eatenGhosts - 1));
-                        g.mode = Mode.DIED;
-                        g.setGhostSpeed(speedFactor);
-                        break;
+                case VULNERABLE:
+                    eatenGhosts++;
+                    score += 200 * ((int) Math.pow(2, eatenGhosts - 1));
+                    g.mode = Mode.DIED;
+                    g.setGhostSpeed(speedFactor);
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
             }
 
@@ -132,7 +132,7 @@ public class Engine {
 
     /**
      * Move the given element to its next position.
-     * 
+     *
      * @param elem  The element to be moved.
      * @param board The board.
      */
@@ -154,48 +154,48 @@ public class Engine {
         double speed = elem.getSpeed();
 
         switch (elem.direction) {
-            case LEFT:
-                if (board.cells.get(28 * row + col).isLeftPortal(board.maze)) {
-                    col = board.maze[0].length;
-                    elem.doubleCol = col;
-                    x = propX * col;
-                } else if (!board.cells.get(28 * row + col - 1).isWall(board.maze)) {
-                    elem.doubleCol -= speed;
-                    col = (elem.doubleCol > col - 1) ? col : col - 1;
-                    x -= propX * speed;
-                }
-                break;
+        case LEFT:
+            if (board.cells.get(28 * row + col).isLeftPortal(board.maze)) {
+                col = board.maze[0].length;
+                elem.doubleCol = col;
+                x = propX * col;
+            } else if (!board.cells.get(28 * row + col - 1).isWall(board.maze)) {
+                elem.doubleCol -= speed;
+                col = (elem.doubleCol > col - 1) ? col : col - 1;
+                x -= propX * speed;
+            }
+            break;
 
-            case RIGHT:
-                if (board.cells.get(28 * row + col).isRightPortal(board.maze)) {
-                    col = -1;
-                    elem.doubleCol = col;
-                    x = propX * col;
-                } else if (!board.cells.get(28 * row + col + 1).isWall(board.maze)) {
-                    elem.doubleCol += speed;
-                    col = (elem.doubleCol < col + 1) ? col : col + 1;
-                    x += propX * speed;
-                }
-                break;
+        case RIGHT:
+            if (board.cells.get(28 * row + col).isRightPortal(board.maze)) {
+                col = -1;
+                elem.doubleCol = col;
+                x = propX * col;
+            } else if (!board.cells.get(28 * row + col + 1).isWall(board.maze)) {
+                elem.doubleCol += speed;
+                col = (elem.doubleCol < col + 1) ? col : col + 1;
+                x += propX * speed;
+            }
+            break;
 
-            case UP:
-                if (!board.cells.get(28 * row + col - 28).isWall(board.maze)) {
-                    elem.doubleRow -= speed;
-                    row = (elem.doubleRow > row - 1) ? row : row - 1;
-                    y -= propY * speed;
-                }
-                break;
+        case UP:
+            if (!board.cells.get(28 * row + col - 28).isWall(board.maze)) {
+                elem.doubleRow -= speed;
+                row = (elem.doubleRow > row - 1) ? row : row - 1;
+                y -= propY * speed;
+            }
+            break;
 
-            case DOWN:
-                if (!board.cells.get(28 * row + col + 28).isWall(board.maze)) {
-                    elem.doubleRow += speed;
-                    row = (elem.doubleRow < row + 1) ? row : row + 1;
-                    y += propY * speed;
-                }
-                break;
+        case DOWN:
+            if (!board.cells.get(28 * row + col + 28).isWall(board.maze)) {
+                elem.doubleRow += speed;
+                row = (elem.doubleRow < row + 1) ? row : row + 1;
+                y += propY * speed;
+            }
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         // Set a new position for the element
@@ -207,7 +207,7 @@ public class Engine {
 
     /**
      * Verify if the direction is available.
-     * 
+     *
      * @param elem
      * @param board
      */
@@ -226,53 +226,53 @@ public class Engine {
         int propY = elem.getProportionY();
 
         switch (elem.nextDirection) {
-            case LEFT:
-                elem.direction = (
-                    !board.cells.get(28 * row + col - 1).isWall(board.maze)
-                    && y >= (propY * row - 7 + LengthConstants.BACKGROUND_DOWNWARD_OFFSET)
-                    && (y + propY) <= (
-                        propY * (row + 1) + 7 + LengthConstants.BACKGROUND_DOWNWARD_OFFSET
-                    )
-                ) ? elem.nextDirection : elem.direction;
-                break;
+        case LEFT:
+            elem.direction = (
+                                 !board.cells.get(28 * row + col - 1).isWall(board.maze)
+                                 && y >= (propY * row - 7 + LengthConstants.BACKGROUND_DOWNWARD_OFFSET)
+                                 && (y + propY) <= (
+                                     propY * (row + 1) + 7 + LengthConstants.BACKGROUND_DOWNWARD_OFFSET
+                                 )
+                             ) ? elem.nextDirection : elem.direction;
+            break;
 
-            case RIGHT:
-                elem.direction = (
-                    !board.cells.get(28 * row + col + 1).isWall(board.maze)
-                    && y >= (propY * row - 7 + LengthConstants.BACKGROUND_DOWNWARD_OFFSET)
-                    && (y + propY) <= (
-                        propY* (row + 1) + 7 + LengthConstants.BACKGROUND_DOWNWARD_OFFSET
-                    )
-                ) ? elem.nextDirection : elem.direction;
-                break;
+        case RIGHT:
+            elem.direction = (
+                                 !board.cells.get(28 * row + col + 1).isWall(board.maze)
+                                 && y >= (propY * row - 7 + LengthConstants.BACKGROUND_DOWNWARD_OFFSET)
+                                 && (y + propY) <= (
+                                     propY * (row + 1) + 7 + LengthConstants.BACKGROUND_DOWNWARD_OFFSET
+                                 )
+                             ) ? elem.nextDirection : elem.direction;
+            break;
 
-            case UP:
-                elem.direction = (
-                    !board.cells.get(28 * row + col - 28).isWall(board.maze)
-                    && x >= (propX * col - 7) && (x + propX) <= (propX * (col + 1) + 7)
-                ) ? elem.nextDirection : elem.direction;
-                break;
+        case UP:
+            elem.direction = (
+                                 !board.cells.get(28 * row + col - 28).isWall(board.maze)
+                                 && x >= (propX * col - 7) && (x + propX) <= (propX * (col + 1) + 7)
+                             ) ? elem.nextDirection : elem.direction;
+            break;
 
-            case DOWN:
-                elem.direction = (
-                    !board.cells.get(28 * row + col + 28).isWall(board.maze)
-                    && (
-                        Ghost.class.isInstance(elem)
-                        || !board.cells.get(28 * row + col + 28).isGhostHouse(board.maze)
-                    )
-                    && x >= (propX * col - 7) && (x + propX) <= (propX * (col + 1) + 7)
-                ) ? elem.nextDirection : elem.direction;
-                break;
+        case DOWN:
+            elem.direction = (
+                                 !board.cells.get(28 * row + col + 28).isWall(board.maze)
+                                 && (
+                                     Ghost.class.isInstance(elem)
+                                     || !board.cells.get(28 * row + col + 28).isGhostHouse(board.maze)
+                                 )
+                                 && x >= (propX * col - 7) && (x + propX) <= (propX * (col + 1) + 7)
+                             ) ? elem.nextDirection : elem.direction;
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
     }
 
     /**
      * Moves the ghost to its next position.
-     * 
+     *
      * @param ghost
      * @param pacMan
      * @param board
@@ -284,25 +284,25 @@ public class Engine {
 
         switch (ghost.mode) {
 
-            case NORMAL:
-                if (ghost.type == GhostType.BLINKY || ghost.type == GhostType.PINKY)
-                    ghost.path = this.getPath(ghost, board, pacMan);
+        case NORMAL:
+            if (ghost.type == GhostType.BLINKY || ghost.type == GhostType.PINKY)
+                ghost.path = this.getPath(ghost, board, pacMan);
 
-                else if (ghost.path.size() < 3)
-                    ghost.path.addAll(this.getRandomPath(ghost, board));
-                break;
+            else if (ghost.path.size() < 3)
+                ghost.path.addAll(this.getRandomPath(ghost, board));
+            break;
 
-            case VULNERABLE:
-                if (ghost.path.size() < 3)
-                    ghost.path.addAll(this.getRandomPath(ghost, board));
-                break;
+        case VULNERABLE:
+            if (ghost.path.size() < 3)
+                ghost.path.addAll(this.getRandomPath(ghost, board));
+            break;
 
-            case DIED:
-                ghost.path = this.backToGhostHouse(ghost, board);
-                break;
+        case DIED:
+            ghost.path = this.backToGhostHouse(ghost, board);
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         if ((grow == ghost.graphPosition.getX() && gcol == ghost.graphPosition.getY())
@@ -328,7 +328,7 @@ public class Engine {
 
     /**
      * Get the shortest path between the ghost and the pacman.
-     * 
+     *
      * @param ghost
      * @param board
      * @param pacMan
@@ -336,12 +336,12 @@ public class Engine {
      */
     public ArrayList<Point> getPath(Ghost ghost, Board board, PacMan pacMan) {
         return board.mazeGraph.shortestPath(new Point(ghost.getRow(), ghost.getColumn()),
-                new Point(pacMan.getRow(), pacMan.getColumn()));
+                                            new Point(pacMan.getRow(), pacMan.getColumn()));
     }
 
     /**
      * Get the path to the ghosts' cage.
-     * 
+     *
      * @param ghost
      * @param board
      * @return
@@ -351,28 +351,32 @@ public class Engine {
         ArrayList<Point> path;
 
         switch (ghost.type) {
-            case INKY:
-                path = board.mazeGraph.shortestPath(new Point(ghost.getRow(), ghost.getColumn()), new Point(14, 13));
-                break;
+        case INKY:
+            path = board.mazeGraph.shortestPath(new Point(ghost.getRow()
+                                                , ghost.getColumn()), new Point(14, 13));
+            break;
 
-            case CLYDE:
-                path = board.mazeGraph.shortestPath(new Point(ghost.getRow(), ghost.getColumn()), new Point(14, 14));
-                break;
+        case CLYDE:
+            path = board.mazeGraph.shortestPath(new Point(ghost.getRow()
+                                                , ghost.getColumn()), new Point(14, 14));
+            break;
 
-            case PINKY:
-                path = board.mazeGraph.shortestPath(new Point(ghost.getRow(), ghost.getColumn()), new Point(13, 13));
-                break;
+        case PINKY:
+            path = board.mazeGraph.shortestPath(new Point(ghost.getRow()
+                                                , ghost.getColumn()), new Point(13, 13));
+            break;
 
-            default:
-                path = board.mazeGraph.shortestPath(new Point(ghost.getRow(), ghost.getColumn()), new Point(13, 14));
-                break;
+        default:
+            path = board.mazeGraph.shortestPath(new Point(ghost.getRow()
+                                                , ghost.getColumn()), new Point(13, 14));
+            break;
         }
         return path;
     }
 
     /**
      * Get a random path for the ghosts.
-     * 
+     *
      * @param ghost
      * @param board
      * @return Some random path.
@@ -386,21 +390,26 @@ public class Engine {
 
         grow = ghost.getRow();
         gcol = ghost.getColumn();
-        prow = (ghost.path.isEmpty()) ? grow : ghost.path.get(ghost.path.size() - 1).getX();
-        pcol = (ghost.path.isEmpty()) ? gcol : ghost.path.get(ghost.path.size() - 1).getY();
+        prow = (ghost.path.isEmpty())
+               ? grow
+               : ghost.path.get(ghost.path.size() - 1).getX();
+        pcol = (ghost.path.isEmpty())
+               ? gcol
+               : ghost.path.get(ghost.path.size() - 1).getY();
 
         do {
             row = generator.nextInt(30);
             col = generator.nextInt(27);
         } while (board.cells.get(28 * row + col).isWall(board.maze)
-                || board.cells.get(28 * row + col).isGhostHouse(board.maze));
+                 || board.cells.get(28 * row + col).isGhostHouse(board.maze));
 
-        return board.mazeGraph.shortestPath(new Point(prow, pcol), new Point(row, col));
+        return board.mazeGraph.shortestPath(new Point(prow, pcol)
+                                            , new Point(row, col));
     }
 
     /**
      * Verify collision between two elements.
-     * 
+     *
      * @param e1 The first element.
      * @param e2 The second element.
      * @return Boolean.
@@ -418,12 +427,13 @@ public class Engine {
         x2 = e2.getX() + 10;
         y2 = e2.getY() + 10;
 
-        return (new Rectangle2D(x1, y1, propX, propY).intersects(x2, y2, propX, propY));
+        return (new Rectangle2D(x1, y1, propX, propY).intersects(
+                    x2, y2, propX, propY));
     }
 
     /**
      * Get the remaining lives.
-     * 
+     *
      * @return The number of remaining lives.
      */
     public int getLives() {
@@ -439,7 +449,7 @@ public class Engine {
 
     /**
      * Returns a string version of the score.
-     * 
+     *
      * @return A string version of the score.
      */
     public String getScore() {
@@ -464,7 +474,7 @@ public class Engine {
 
     /**
      * Set a new level for the game.
-     * 
+     *
      * @param level New level.
      */
     public void setLevel(int level) {
@@ -480,13 +490,13 @@ public class Engine {
 
     /**
      * Get the current speed factor.
-     * 
+     *
      * @return The speed factor.
      */
     public double getSpeedFactor() {
         return speedFactor;
     }
-    
+
     /**
      * Update the level of the game.
      * @param board
@@ -495,28 +505,28 @@ public class Engine {
      * @param foods
      * @param gameStatus
      */
-    public void levelUp(Board board, PacMan pacMan, 
-            ArrayList<Ghost> ghosts, ArrayList<Element> foods,
-            Status gameStatus) {
+    public void levelUp(Board board, PacMan pacMan,
+                        ArrayList<Ghost> ghosts, ArrayList<Element> foods,
+                        Status gameStatus) {
         // Update the level
         this.setLevel(this.getLevel() + 1);
         // Set one speed factor according to the level
-        
+
         speedFactor = 1 + this.getLevel() * 0.02;
-        
+
         // Turn back the status of the game to ready
         gameStatus = Status.READY;
         // Reset all the elements
         Utils.resetAll(board, pacMan, ghosts, foods);
-        // Increases the ghosts speed 
-        for(Ghost g: ghosts) {
-            if(g.type.equals(GhostType.PINKY))
+        // Increases the ghosts speed
+        for (Ghost g : ghosts) {
+            if (g.type.equals(GhostType.PINKY))
                 g.setSpeed(speedFactor * Speed.GHOST_NORMAL_SPEED - 0.008);
             else
                 g.setSpeed(speedFactor * Speed.GHOST_NORMAL_SPEED);
         }
-        
-        // Reset the number of pacDots eaten 
+
+        // Reset the number of pacDots eaten
         pacMan.eatenPacDots = 0;
     }
 

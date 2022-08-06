@@ -6,7 +6,7 @@ import javafx.scene.input.KeyCode;
 
 /**
  * This abstract class is a base for all classes in the game.
- * 
+ *
  * @author Maxsuel F. de Almeida
  */
 public abstract class Element {
@@ -27,7 +27,7 @@ public abstract class Element {
 
     /**
      * Constructor of the class.
-     * 
+     *
      * @param row   Row of the element in the 2D array maze.
      * @param col   Column of the element in the 2D array maze.
      * @param image Image of the element.
@@ -47,7 +47,7 @@ public abstract class Element {
 
     /**
      * Constructor for the dynamic elements.
-     * 
+     *
      * @param row Row of the element in the 2D array maze.
      * @param col Column of the element in the 2D array maze.
      * @param speed Initial speed of the element.
@@ -66,7 +66,7 @@ public abstract class Element {
 
     /**
      * Get the image of the element.
-     * 
+     *
      * @return image
      */
     public Image getImage() {
@@ -75,7 +75,7 @@ public abstract class Element {
 
     /**
      * Set the image for the element.
-     * 
+     *
      * @param image Image for the element.
      */
     public void setImage(Image image) {
@@ -84,7 +84,7 @@ public abstract class Element {
 
     /**
      * Get the horizontal coordinate of the element.
-     * 
+     *
      * @return x
      */
     public double getX() {
@@ -93,7 +93,7 @@ public abstract class Element {
 
     /**
      * Set the horizontal coordinate for the element.
-     * 
+     *
      * @param x
      */
     public void setX(double x) {
@@ -102,7 +102,7 @@ public abstract class Element {
 
     /**
      * Get the vertical coordinate of the element.
-     * 
+     *
      * @return y
      */
     public double getY() {
@@ -111,7 +111,7 @@ public abstract class Element {
 
     /**
      * Set the vertical coordinate for the element.
-     * 
+     *
      * @param y
      */
     public void setY(double y) {
@@ -120,7 +120,7 @@ public abstract class Element {
 
     /**
      * Get the speed of the element.
-     * 
+     *
      * @return velocity
      */
     public double getSpeed() {
@@ -129,7 +129,7 @@ public abstract class Element {
 
     /**
      * Set the speed for the element.
-     * 
+     *
      * @param speed
      */
     public void setSpeed(double speed) {
@@ -138,7 +138,7 @@ public abstract class Element {
 
     /**
      * Get the row of the element.
-     * 
+     *
      * @return row
      */
     public int getRow() {
@@ -147,7 +147,7 @@ public abstract class Element {
 
     /**
      * Set the row for the element.
-     * 
+     *
      * @param row
      */
     public void setRow(int row) {
@@ -156,7 +156,7 @@ public abstract class Element {
 
     /**
      * Get the column of the element.
-     * 
+     *
      * @return col
      */
     public int getColumn() {
@@ -165,7 +165,7 @@ public abstract class Element {
 
     /**
      * Set the column for the element.
-     * 
+     *
      * @param col
      */
     public void setColumn(int col) {
@@ -175,7 +175,7 @@ public abstract class Element {
     /**
      * Get the relation between the backgrond's width and the data model's
      * numbers of columns.
-     * 
+     *
      * @return
      */
     public int getProportionX() {
@@ -185,7 +185,7 @@ public abstract class Element {
     /**
      * Get the relation between the backgrond's height and the data model's
      * numbers of rows.
-     * 
+     *
      * @return
      */
     public int getProportionY() {
@@ -195,7 +195,7 @@ public abstract class Element {
     /**
      * Draws the element in the canvas.
      * This is an abstract method and should be implemented.
-     * 
+     *
      * @param graphicsContext
      */
     public abstract void render(GraphicsContext graphicsContext);
